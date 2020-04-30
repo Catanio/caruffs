@@ -1,6 +1,8 @@
 # caruffs
 this is a experimental personal project, intending to learn react, react native and node and, if it works, deploy an app to offer and search for rides to the university
 
+
+portuguese (I'll be posting a translated version to english later on):
 ___________________
 Este projeto vem da ideia de aprender com a mão na massa. Infelizmente a falta de experiência com documentação apropriada tomariam um tempo demasiado pra organizar isso pra fácil leitura de qualquer público, então essse readme serve mais para lembrete do que eu fiz e anotações durante o estudo. Tenho tido como base os vídeos da semana omnistack 10.
 
