@@ -15,7 +15,7 @@ app.use(routes)
 
 // connects to mongodb
 // ( ! ) remember to replace "test" for the DB name on the string bellow
-mongoose.connect(/* String to connect to the database*/, {
+mongoose.connect(/* conection string */, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
