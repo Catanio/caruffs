@@ -59,7 +59,7 @@ nav.opened {
 .open-nav {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 60px;
   width: 38px;
   height: 38px;
   background: #ffffff;
@@ -116,75 +116,6 @@ nav ul li {
   padding: 8px 0;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 500px;
-  background: #ffffff;
-  margin: 0 auto;
-  border-top: solid 1px #1d7eae;
-  padding: 8px;
-}
-
-.filter-option + .filter-option {
-  margin-top: 8px;
-}
-
-.filter-button {
-  width: 100%;
-  padding: 8px;
-  border: solid 1px #1d7eae;
-  border-radius: 3px;
-}
-.filter-option.active .filter-button {
-  border-radius: 3px 0 0 3px;
-  border-style: dashed;
-  border-bottom: none;
-}
-
-.filter-select {
-  justify-content: flex-start;
-  padding: 8px;
-}
-.filter-option.active .filter-select {
-  border: solid 1px #1d7eae;
-  border-style: dashed;
-  border-top: none;
-}
-
-.filter-select-section {
-  width: calc(50% - 1px);
-}
-
-.filter-select-section + .filter-select-section {
-  border-left: solid 1px #1d7eae;
-  border-left-style: dashed;
-}
-
-.filter-select span + span {
-  margin-left: 8px;
-}
-
-.filter-option.active .filter-select,
-.filter-option .filter-content {
-  display: flex;
-}
-
-.filter-option.active .filter-content,
-.filter-option .filter-select {
-  display: none;
-}
-
-@media (min-width: 502px) {
-  footer {
-    border-left: solid 1px #1d7eae;
-    border-right: solid 1px #1d7eae;
-    border-radius: 3px;
-  }
-}
-
 @media (min-width: 900px) {
   main {
     padding-bottom: 0;
@@ -197,9 +128,5 @@ footer {
   .open-nav,
   .close-nav {
     display: none;
-  }
-
-  footer {
-    left: 280px;
   }
 }

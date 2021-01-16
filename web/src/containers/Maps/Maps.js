@@ -1,22 +1,41 @@
-import { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import "leaflet/dist/leaflet.css";
 
-export class MapContainer extends Component {
+import { Component } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
+
+const position = [51.505, -0.09];
+
+export class Maps extends Component {
   render() {
     return (
-      <Map google={this.props.google} fullscreenControl={false} zoom={14}>
-        {/* <Marker onClick={this.onMarkerClick} name={"Current location"} />
+      <MapContainer
+        center={position}
+        zoom={13}
+        scrollWheelZoom={false}
+        style={{ width: "100%", height: "100vh", zIndex: 1 }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow> */}
-      </Map>
+        <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyA-5FHIQ_7fCCID6tANJqTtvKNTJDaSJ4M",
-})(MapContainer);
+export default Maps;
