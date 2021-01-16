@@ -1,38 +1,205 @@
-.App {
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  outline: none;
   text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding-bottom: 200px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 38px;
+  line-height: 38px;
+  background: #ffffff;
+  border: solid 1px #1d7eae;
+  border-radius: 3px;
+  padding: 0 20px;
+  color: #1d7eae;
+  z-index: 8;
+}
+.header-button:hover {
+  background: #efefef;
+}
+
+nav {
+  position: absolute;
+  left: -280px;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: #ffffff;
+  z-index: 9;
+  transition: all 0.2s;
+}
+nav.opened {
+  left: 0;
+}
+
+.open-nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 38px;
+  height: 38px;
+  background: #ffffff;
+  border: solid 1px #1d7eae;
+  border-radius: 50%;
+  color: #1d7eae;
+  z-index: 6;
+}
+.open-nav:hover {
+  background: #efefef;
+}
+
+.close-nav {
+  color: #1d7eae;
+  background: none;
+  border: none;
+  float: right;
+  clear: both;
+  font-size: 32px;
+  margin-bottom: -24px;
+}
+
+.nav-user {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 16px;
+  border-bottom: solid 1px #cccccc;
+  margin-bottom: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: solid 1px #1d7eae;
+  background-size: cover;
+  background-position: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav-user p {
+  padding-left: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+nav ul {
+  padding-left: 16px;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 8px 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 500px;
+  background: #ffffff;
+  margin: 0 auto;
+  border-top: solid 1px #1d7eae;
+  padding: 8px;
+}
+
+.filter-option + .filter-option {
+  margin-top: 8px;
+}
+
+.filter-button {
+  width: 100%;
+  padding: 8px;
+  border: solid 1px #1d7eae;
+  border-radius: 3px;
+}
+.filter-option.active .filter-button {
+  border-radius: 3px 0 0 3px;
+  border-style: dashed;
+  border-bottom: none;
+}
+
+.filter-select {
+  justify-content: flex-start;
+  padding: 8px;
+}
+.filter-option.active .filter-select {
+  border: solid 1px #1d7eae;
+  border-style: dashed;
+  border-top: none;
+}
+
+.filter-select-section {
+  width: calc(50% - 1px);
+}
+
+.filter-select-section + .filter-select-section {
+  border-left: solid 1px #1d7eae;
+  border-left-style: dashed;
+}
+
+.filter-select span + span {
+  margin-left: 8px;
+}
+
+.filter-option.active .filter-select,
+.filter-option .filter-content {
+  display: flex;
+}
+
+.filter-option.active .filter-content,
+.filter-option .filter-select {
+  display: none;
+}
+
+@media (min-width: 502px) {
+  footer {
+    border-left: solid 1px #1d7eae;
+    border-right: solid 1px #1d7eae;
+    border-radius: 3px;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (min-width: 900px) {
+  main {
+    padding-bottom: 0;
+  }
+
+  nav {
+    left: 0;
+  }
+
+  .open-nav,
+  .close-nav {
+    display: none;
+  }
+
+  footer {
+    left: 280px;
   }
 }
