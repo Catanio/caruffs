@@ -1,0 +1,164 @@
+.back-modal {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: #1d9eae;
+  border: none;
+  background: none;
+  z-index: 99;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 8px;
+  margin: 0;
+  line-height: 0;
+}
+
+.close-map-icon,
+.save-map-icon {
+  position: absolute;
+  bottom: 20px;
+  border: none;
+  z-index: 99;
+  font-size: 40px;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.close-map-icon {
+  left: 20px;
+}
+
+.save-map-icon {
+  right: 20px;
+}
+
+.pin-map svg {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  z-index: 99;
+  font-size: 40px;
+}
+
+.pin-map svg + svg {
+  top: calc(50% - 16px);
+}
+
+.white-button {
+  border: solid 1px #1d9eae;
+  margin: 4px 0;
+  padding: 8px;
+  width: 100%;
+  color: #1d9eae;
+}
+
+.step-one::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  z-index: 90;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.step-one h3 {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.step-two,
+.step-three {
+  width: 100%;
+  max-width: 900px;
+  padding: 32px 16px;
+  overflow: auto;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.step-two img,
+.step-three img {
+  width: 100px;
+}
+
+.step-two h3,
+.step-three h3 {
+  margin: 0;
+  padding: 8px 0 0;
+}
+
+.step-two hr,
+.step-three hr {
+  border: none;
+  border-top: solid 2px #cccccc;
+  width: 200px;
+}
+
+.step-two .day-container,
+.step-three .day-container {
+  width: 100%;
+  padding: 8px;
+  border: solid 1px #1d9eae;
+  margin: 2px 0;
+  font-weight: bold;
+}
+
+.step-two .day-container label {
+  width: 100%;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.step-two .day-container span {
+  font-weight: bold;
+}
+.step-two .day-container .MuiFormControlLabel-label {
+  width: calc(100% - 100px);
+  padding: 0 16px;
+}
+
+.step-three .day-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.step-three .day-container span {
+  width: 100px;
+}
+
+.step-three .day-container .MuiInput-underline:before {
+  border: none;
+}
+
+.fullscreen-modal .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fullscreen-modal .button-container button {
+  width: calc(50% - 2px);
+  border: none;
+  padding: 8px;
+  color: #ffffff;
+}

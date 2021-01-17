@@ -3,6 +3,7 @@ import PersonIcon from "@material-ui/icons/Person";
 
 import Maps from "./containers/Maps/Maps";
 import Footer from "./containers/Footer/Footer";
+import CreateRideModal from "./containers/CreateRide/CreateRideModal";
 
 import "./App.css";
 
@@ -10,10 +11,17 @@ import UnnamedImg from "./unnamed.png";
 
 function App() {
   const [nav, setNav] = useState(false);
+  const [createRideModal, setCreateRideModal] = useState(false);
+  // const [viewRideModal, setViewRideModal] = useState(false);
 
   return (
     <main>
-      <button className="header-button">Procurar/Oferecer</button>
+      <button
+        className="header-button"
+        onClick={() => setCreateRideModal(true)}
+      >
+        Oferecer Carona!
+      </button>
 
       <button className="open-nav" onClick={() => setNav(true)}>
         <PersonIcon />
@@ -41,6 +49,11 @@ function App() {
       </nav>
 
       <Maps />
+
+      <CreateRideModal
+        open={createRideModal}
+        handleClose={() => setCreateRideModal(false)}
+      />
 
       <Footer />
     </main>

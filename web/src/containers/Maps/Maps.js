@@ -21,6 +21,7 @@ export class Maps extends Component {
         center={position}
         zoom={13}
         scrollWheelZoom={false}
+        className="maps-container"
         style={{ width: "100%", height: "100vh", zIndex: 1 }}
       >
         <TileLayer
