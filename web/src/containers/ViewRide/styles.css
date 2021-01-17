@@ -17,7 +17,24 @@
 .view-ride-info {
   background: #ffffff;
   border-radius: 3px;
-  padding: 8px;
+  padding: 16px;
   max-width: 900px;
   width: 90%;
+  text-align: center;
+}
+
+.view-ride-info h4 {
+  font-size: 14px;
+}
+
+.view-ride-info hr {
+  border: none;
+  border-top: solid 2px #cccccc;
+  width: 60%;
+  margin: 24px auto;
+}
+
+.view-ride-info p {
+  margin: 0;
+  font-size: 13px;
 }

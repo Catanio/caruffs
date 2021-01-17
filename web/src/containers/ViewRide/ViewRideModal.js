@@ -19,7 +19,7 @@ const ViewRideModal = ({ open, marker, handleClose }) => {
             style={{ backgroundImage: `url(${UnnamedImg})` }}
           />
 
-          <p className="view-ride-info-name">{marker.user?.name}</p>
+          <h4 className="view-ride-info-name">{marker.user?.name}</h4>
 
           <p className="view-ride-info-description">{marker.user?.bio}</p>
 

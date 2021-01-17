@@ -158,14 +158,14 @@
   border: none;
 }
 
-.fullscreen-modal .button-container {
+.create-ride-modal .button-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.fullscreen-modal .button-container button {
+.create-ride-modal .button-container button {
   width: calc(50% - 2px);
   border: none;
   padding: 8px;
