@@ -44,13 +44,14 @@ main {
 
 nav {
   position: absolute;
-  left: -280px;
+  left: -290px;
   top: 0;
   bottom: 0;
   width: 280px;
   background: #ffffff;
   z-index: 9;
   transition: all 0.2s;
+  box-shadow: -1px 0 10px 0;
 }
 nav.opened {
   left: 0;
