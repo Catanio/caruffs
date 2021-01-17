@@ -37,10 +37,7 @@ const Maps = ({ markers }) => {
         />
 
         {markers.map((marker, key) => (
-          <Marker
-            position={[marker.ride.position.lat, marker.ride.position.lng]}
-            key={key}
-          >
+          <Marker position={marker.ride.position} key={key}>
             <Popup>
               <a
                 onClick={() => setViewRideModal({ open: true, marker: marker })}

@@ -19,10 +19,7 @@ const MockMarkers = [
       email: "mauri.catanio@yahoo.com.br",
     },
     ride: {
-      position: {
-        lat: 51.505,
-        lng: -0.09,
-      },
+      position: [51.505, -0.09],
       days: {
         mon: {
           going: "12:30",
@@ -44,10 +41,7 @@ const MockMarkers = [
       email: "mauri.catanio@yahoo.com.br",
     },
     ride: {
-      position: {
-        lat: 51.56,
-        lng: -0.19,
-      },
+      position: [51.56, -0.19],
       days: {
         mon: {
           going: "12:30",
