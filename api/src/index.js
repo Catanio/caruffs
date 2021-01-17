@@ -1,25 +1,18 @@
-// routing and HTMLmethods
-const express = require ('express')
-// noSQL db management
-const mongoose = require('mongoose')
-// routing
-const routes = require('./routes')
+const dotenv = require('dotenv');
+dotenv.config();
+const express = require ('express');
+const mongoose = require('mongoose');
+const routes = require('./routes');
 
-const app = express()
+const app = express();
+app.use(express.json());
+app.use(routes);
 
-// this allows express to use Json
-app.use(express.json())
-// it needs to come first then use.routes in order to routes use it.
-app.use(routes)
-
-
-// connects to mongodb
-// ( ! ) remember to replace "test" for the DB name on the string bellow
-mongoose.connect(/* conection string */, {
+mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+    useFindAndModify: false,
+    useCreateIndex: true
+});
 
-
-
-app.listen(9090)
+app.listen(process.env.PORT);

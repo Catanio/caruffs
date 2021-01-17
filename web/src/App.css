@@ -120,8 +120,8 @@ nav ul li {
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   background: #ffffff;
+  overflow: auto;
   outline: none;
 }
 
