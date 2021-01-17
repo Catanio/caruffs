@@ -5,7 +5,8 @@ const ProfileSchema = new mongoose.Schema({
 
     name: String,
     bio: String,
-    contact: String,
+    phone: String,
+    mail: String,
 });
 
 module.exports = mongoose.model('Profile', ProfileSchema);
