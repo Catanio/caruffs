@@ -8,17 +8,28 @@ module.exports = {
     },
 
     async store(req, res) {
-        // { } deconstructs os dados de req.body and puts inside the new const
-        const { ownerId, offering, weekInfo, latitude, longitude } = req.body;
+        console.log(req.body);
+        const { ownerId, mon, tue, wed, thu, fri, sat, latitude, longitude } = req.body;
+
+        console.log(latitude);
+        console.log(longitude);
 
         const location = {
             type: 'Point',
             coordinates: [longitude, latitude] //mongoDB geolocation tool specifies first longitude and then latitude
         };
 
+        const weekInfo = {
+            mon,
+            tue,
+            wed,
+            thu,
+            fri,
+            sat,
+        };
+
         const ride = await Ride.create({
             ownerId,
-            offering,
             weekInfo,
             location,
         });

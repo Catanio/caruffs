@@ -4,42 +4,42 @@ const PointSchema = require('./utils/PointSchema');
 const RideSchema = new mongoose.Schema({
 
     ownerId: String,
+    //offering: Boolean,
     // geolocation
-    offering: Boolean,
     location: {
         type: PointSchema,
         index: '2dsphere',
     },
     weekInfo: {
         mon: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
         tue: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
         wed: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
         thu: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
         fri: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
         sat: {
-            vacancies: Number,
-            Depart: String,
-            arrival: String
+            //vacancies: Number,
+            going: String,
+            backing: String
         },
     }
 });
