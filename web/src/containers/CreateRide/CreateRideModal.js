@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import axios from "axios";
 import Modal from "@material-ui/core/Modal";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
@@ -95,8 +96,18 @@ const CreateRideModal = ({ open, handleClose }) => {
     };
 
     mapCenter = position;
+
     console.log(rideObj);
-    cleanModal();
+
+    axios
+      .post(`localhost:3001`, rideObj)
+      .then((res) => {
+        console.log(res);
+        cleanModal();
+      })
+      .catch((err) => {
+        console.timeLog(err);
+      });
   };
 
   function MapEvents() {
