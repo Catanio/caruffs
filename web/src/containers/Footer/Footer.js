@@ -16,10 +16,6 @@ const dayName = {
 
 function Footer() {
   const [rideFilter, setRideFilter] = useState(false);
-  const [rideType, setRideType] = useState({
-    giving: true,
-    taking: true,
-  });
   const [rideDirection, setRideDirection] = useState({
     going: true,
     backing: true,
@@ -47,36 +43,6 @@ function Footer() {
         </button>
 
         <div className="filter-select">
-          <div className="filter-select-section">
-            <div>
-              <input
-                name="rideType"
-                type="checkbox"
-                id="giving"
-                checked={rideType.giving}
-                onChange={() =>
-                  setRideType({ ...rideType, giving: !rideType.giving })
-                }
-              />
-
-              <label htmlFor="giving">Oferecendo</label>
-            </div>
-
-            <div>
-              <input
-                name="rideType"
-                type="checkbox"
-                id="taking"
-                checked={rideType.taking}
-                onChange={() =>
-                  setRideType({ ...rideType, taking: !rideType.taking })
-                }
-              />
-
-              <label htmlFor="taking">Procurando</label>
-            </div>
-          </div>
-
           <div className="filter-select-section">
             <div>
               <input
@@ -115,9 +81,6 @@ function Footer() {
         </div>
 
         <div className="filter-content">
-          {rideType.giving ? "Oferecendo" : ""}
-          {rideType.giving && rideType.taking ? " e " : ""}
-          {rideType.taking ? "Procurando" : ""};&nbsp;
           {rideDirection.going ? "Ida" : ""}
           {rideDirection.going && rideDirection.backing ? " e " : ""}
           {rideDirection.backing ? "Volta" : ""}
