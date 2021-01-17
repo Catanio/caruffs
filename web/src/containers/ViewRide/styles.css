@@ -25,6 +25,7 @@
 
 .view-ride-info h4 {
   font-size: 14px;
+  margin: 8px 0;
 }
 
 .view-ride-info hr {
@@ -37,4 +38,14 @@
 .view-ride-info p {
   margin: 0;
   font-size: 13px;
+}
+
+.view-ride-modal .day-container {
+  max-width: 900px;
+  width: 90%;
+  padding: 8px;
+  background: #ffffff;
+  border: solid 1px #1d9eae;
+  margin: 2px 0;
+  text-align: center;
 }

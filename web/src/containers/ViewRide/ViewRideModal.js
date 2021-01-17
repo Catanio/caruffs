@@ -3,6 +3,16 @@ import KeyboardReturnIcon from "@material-ui/icons/KeyboardReturn";
 import UnnamedImg from "../../unnamed.png";
 import "./styles.css";
 
+const dayName = {
+  mon: "Segunda",
+  tue: "Terça",
+  wed: "Quarta",
+  thu: "Quinta",
+  fri: "Sexta",
+  sat: "Sábado",
+  sun: "Domingo",
+};
+
 const ViewRideModal = ({ open, marker, handleClose }) => {
   return (
     <Modal open={open} onClose={handleClose}>
@@ -33,20 +43,22 @@ const ViewRideModal = ({ open, marker, handleClose }) => {
           </div>
         </div>
 
-        <div className="rider-profile">
-          <hr />
+        <h3>Horários</h3>
 
-          <div className="day-container">Segunda</div>
-
-          <div className="button-container">
-            <button
-              style={{ backgroundColor: "#f37d1d" }}
-              onClick={handleClose}
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
+        {marker.ride
+          ? Object.keys(marker.ride)
+              .filter((key) => key !== "position")
+              .map((key) => (
+                <div className="day-container">
+                  {dayName[key]} | Ida:{" "}
+                  {marker.ride[key].going ? marker.ride[key].going : "--:--"} |
+                  Volta:{" "}
+                  {marker.ride[key].backing
+                    ? marker.ride[key].backing
+                    : "--:--"}{" "}
+                </div>
+              ))
+          : ""}
       </div>
     </Modal>
   );
