@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 32px 0;
 }
 
 .view-ride-modal h3 {
