@@ -46,18 +46,18 @@ const ViewRideModal = ({ open, marker, handleClose }) => {
         <h3>Horários</h3>
 
         {marker.ride
-          ? Object.keys(marker.ride)
-              .filter((key) => key !== "position")
-              .map((key) => (
-                <div className="day-container">
-                  {dayName[key]} | Ida:{" "}
-                  {marker.ride[key].going ? marker.ride[key].going : "--:--"} |
-                  Volta:{" "}
-                  {marker.ride[key].backing
-                    ? marker.ride[key].backing
-                    : "--:--"}{" "}
-                </div>
-              ))
+          ? Object.keys(marker.ride.days).map((key) => (
+              <div className="day-container">
+                {dayName[key]} | Ida:{" "}
+                {marker.ride.days[key].going
+                  ? marker.ride.days[key].going
+                  : "--:--"}{" "}
+                | Volta:{" "}
+                {marker.ride.days[key].backing
+                  ? marker.ride.days[key].backing
+                  : "--:--"}{" "}
+              </div>
+            ))
           : ""}
       </div>
     </Modal>

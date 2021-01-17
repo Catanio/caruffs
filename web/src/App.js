@@ -23,13 +23,15 @@ const MockMarkers = [
         lat: 51.505,
         lng: -0.09,
       },
-      mon: {
-        going: "12:30",
-        backing: "18:30",
-      },
-      tue: {
-        going: "10:30",
-        backing: "18:30",
+      days: {
+        mon: {
+          going: "12:30",
+          backing: "18:30",
+        },
+        tue: {
+          going: "10:30",
+          backing: "18:30",
+        },
       },
     },
   },
@@ -46,13 +48,15 @@ const MockMarkers = [
         lat: 51.56,
         lng: -0.19,
       },
-      mon: {
-        going: "12:30",
-        backing: "18:30",
-      },
-      tue: {
-        going: "10:30",
-        backing: "18:30",
+      days: {
+        mon: {
+          going: "12:30",
+          backing: "18:30",
+        },
+        tue: {
+          going: "10:30",
+          backing: "18:30",
+        },
       },
     },
   },

@@ -89,8 +89,8 @@ const CreateRideModal = ({ open, handleClose }) => {
       days: Object.keys(days)
         .filter((day) => days[day])
         .map((day) => ({
-          start: startHours[day],
-          end: endHours[day],
+          going: startHours[day],
+          backing: endHours[day],
         })),
     };
 
