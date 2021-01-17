@@ -117,15 +117,6 @@ nav ul li {
   padding: 8px 0;
 }
 
-.fullscreen-modal {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: #ffffff;
-  overflow: auto;
-  outline: none;
-}
-
 .hidden {
   display: none;
 }
@@ -133,6 +124,7 @@ nav ul li {
 @media (min-width: 900px) {
   main {
     padding-bottom: 0;
+    padding-left: 280px;
   }
 
   nav {

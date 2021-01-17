@@ -1,0 +1,23 @@
+.view-ride-modal {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #abe2df;
+  overflow: auto;
+  outline: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.view-ride-modal h3 {
+  margin: 32px 0 8px;
+}
+
+.view-ride-info {
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 8px;
+  max-width: 900px;
+  width: 90%;
+}

@@ -109,8 +109,8 @@ const CreateRideModal = ({ open, handleClose }) => {
   }
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <div className="fullscreen-modal">
+    <Modal open={open} onClose={cleanModal}>
+      <div className="create-ride-modal">
         {step > 0 ? (
           <button className="back-modal" onClick={handleBack}>
             <KeyboardReturnIcon />
@@ -133,10 +133,6 @@ const CreateRideModal = ({ open, handleClose }) => {
             zoomControl={false}
             className="maps-container"
             style={{ width: "100%", height: "100vh", zIndex: 1 }}
-            onMoveEnd={(e) => {
-              mapCenter = e.target.getCenter();
-              console.log(mapCenter);
-            }}
           >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
