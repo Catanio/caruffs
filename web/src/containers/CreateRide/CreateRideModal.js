@@ -86,8 +86,8 @@ const CreateRideModal = ({ open, handleClose }) => {
 
   const saveRide = () => {
     let rideObj = {
-      position: mapCenter,
-      days: Object.keys(days)
+      location: mapCenter,
+      weekInfo: Object.keys(days)
         .filter((day) => days[day])
         .map((day) => ({
           going: startHours[day],
@@ -100,7 +100,7 @@ const CreateRideModal = ({ open, handleClose }) => {
     console.log(rideObj);
 
     axios
-      .post(`localhost:3001`, rideObj)
+      .post(`http://localhost:3333/ride`, rideObj)
       .then((res) => {
         console.log(res);
         cleanModal();
