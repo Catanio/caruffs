@@ -13,7 +13,6 @@ module.exports = {
       res.status(401);
       return res.send('Invalid email')
     }
-
     try {
       body.password = Base64.stringify(SHA256(body.password))
 
