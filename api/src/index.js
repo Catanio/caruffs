@@ -16,5 +16,6 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+app.use('/public', express.static(__dirname + "/static"));
 
 app.listen(process.env.PORT);
