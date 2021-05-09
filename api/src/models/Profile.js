@@ -6,6 +6,7 @@ const ProfileSchema = new mongoose.Schema({
   bio: String,
   phone: String,
   mail: String,
+  password: String
 });
 
 module.exports = mongoose.model('Profile', ProfileSchema);
