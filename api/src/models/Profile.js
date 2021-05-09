@@ -5,8 +5,12 @@ const ProfileSchema = new mongoose.Schema({
   name: String,
   bio: String,
   phone: String,
-  mail: String,
-  password: String
+  mail: {
+    type: String,
+    unique: true // `email` must be unique
+  },
+  password: String,
+  confirmed_email: Boolean
 });
 
 module.exports = mongoose.model('Profile', ProfileSchema);
