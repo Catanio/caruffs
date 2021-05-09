@@ -1,6 +1,7 @@
 const Profile = require('../models/Profile');
 const SHA256 = require("crypto-js/sha256");
 const { get } = require('../models/utils/PointSchema');
+const { update } = require('../models/Profile');
 
 module.exports = {
   async store(req, res) {
@@ -50,5 +51,19 @@ module.exports = {
     }
     delete profile.password
     return res.json(profile)
+  },
+
+  async update(req, res) {
+    const { id } = req.query
+    const body = req.body
+
+    delete body.password
+    delete body.idUffs
+
+    const profile = await Profile.updateOne({ _id : id }, {
+      '$set': body
+    })
+
+    return res.json({ profile });
   }
 }

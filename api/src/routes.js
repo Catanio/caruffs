@@ -10,6 +10,7 @@ routes.post('/ride', RideController.store);
 // User
 routes.post('/profile', ProfileController.store);
 routes.get('/profile', ProfileController.login);
+routes.put('/profile', ProfileController.update);
 routes.post('/login', ProfileController.get);
 
 module.exports = routes;
