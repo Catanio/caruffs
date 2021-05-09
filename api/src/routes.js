@@ -5,8 +5,12 @@ const { isAuthorized } = require('./libs/authorization')
 
 const routes = Router();
 
+// Ride auth
+routes.post('/ride', isAuthorized, RideController.store)
+
+// Ride public
 routes.get('/ride', RideController.index)
-routes.post('/ride', RideController.store)
+
 
 // User auth
 routes.put('/profile', isAuthorized, ProfileController.update)

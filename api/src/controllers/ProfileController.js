@@ -7,23 +7,17 @@ const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
 
 module.exports = {
   async store(req, res) {
-    // '{  }' deconstructs data from req.body and puts inside the new consts
-    const { idUffs, password, name, bio, phone, mail } = req.body
-    if (!emailRegexp.test(mail)) {
+    const body = req.body
+
+    if (!emailRegexp.test(body.mail)) {
       res.status(401);
       return res.send('Invalid email')
     }
-    try {
 
-      const profile = await Profile.create({
-        idUffs,
-        password: Base64.stringify(SHA256(password)),
-        name,
-        bio,
-        phone,
-        mail,
-        confirmed_email: false
-      });
+    try {
+      body.password = Base64.stringify(SHA256(body.password))
+
+      const profile = await Profile.create(body);
       
       mailer.sendConfirmationEmail(mail)
       
