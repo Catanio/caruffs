@@ -15,4 +15,4 @@ const ProfileSchema = new mongoose.Schema({
   vehicle: VehicleSchema
 });
 
-module.exports = mongoose.model('Profile', ProfileSchema);
+module.exports = { Profile: mongoose.model('Profile', ProfileSchema), ProfileSchema };

@@ -1,39 +1,44 @@
-const Ride = require('../models/Ride')
+const { Ride } = require('../models/Ride')
 
 module.exports = {
   async index(req, res) {
     const { latitude, longitude, radius } = req.query
 
     const rides = await Ride.find({
-        offering :  {
-            $eq: true
+      offering :  {
+        $eq: true
+      },
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [longitude, latitude],
+          },
+          $maxDistance: radius,
         },
-        location: {
-            $near: {
-                $geometry: {
-                    type: 'Point',
-                    coordinates: [longitude, latitude],
-                },
-                $maxDistance: radius,
-            },
-        },
+      },
     }).lean()
 
     return res.json(rides)
   },
 
   async store(req, res) {
+    if (!req.user.vehicle) {
+      res.status(401);
+      return res.send('Must have vehicle to create ride')
+    }
     const { lat, lng, week_info } = req.body;
 
     const location = {
-        type: 'Point',
-        coordinates: [lng, lat] //mongoDB geolocation tool specifies first longitude and then latitude
+      type: 'Point',
+      coordinates: [lng, lat] //mongoDB geolocation tool specifies first longitude and then latitude
     }
 
     const ride = await Ride.create({
-        ownerId: req.user._id,
-        location,
-        week_info
+      owner: req.user,
+      location,
+      week_info,
+      available_seats: req.user.vehicle.available_seats
     })
 
     return res.json({ ride })
