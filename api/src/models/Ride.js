@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const PointSchema = require('./utils/PointSchema');
-const Profile = require('./Profile')
+const { ProfileSchema } = require('./Profile')
+const WeekInfoSchema = require('./utils/WeekInfoSchema')
 
 const RideSchema = new mongoose.Schema({
-  owner: Profile,
+  owner: ProfileSchema,
   location: {
     type: PointSchema,
     index: '2dsphere',
@@ -12,4 +13,4 @@ const RideSchema = new mongoose.Schema({
   available_seats: Number
 });
 
-module.exports = mongoose.model('Ride', RideSchema);
+module.exports = { Ride: mongoose.model('Ride', RideSchema), RideSchema }

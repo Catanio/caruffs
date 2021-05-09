@@ -1,4 +1,4 @@
-const Profile = require('../models/Profile');
+const { Profile } = require('../models/Profile');
 const SHA256 = require("crypto-js/sha256");
 const Base64 = require('crypto-js/enc-base64')
 const jwt = require('jsonwebtoken')

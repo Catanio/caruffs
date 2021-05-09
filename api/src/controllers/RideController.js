@@ -1,5 +1,5 @@
-const Ride = require('../models/Ride')
-const Match = require('../models/Match')
+const { Ride } = require('../models/Ride')
+
 module.exports = {
   async index(req, res) {
     const { latitude, longitude, radius } = req.query

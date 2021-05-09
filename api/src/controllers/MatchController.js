@@ -1,5 +1,5 @@
-const Ride = require('../models/Ride')
-const Match = require('../models/Match')
+const { Ride } = require('../models/Ride')
+const { Match } = require('../models/Match')
 
 module.exports = {
   async join(req, res) {
