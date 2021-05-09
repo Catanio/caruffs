@@ -17,7 +17,7 @@ module.exports = {
     });
 
     return res.json( {
-      'create': profile,
+      profile,
     });
   },
 
@@ -42,6 +42,13 @@ module.exports = {
   },
 
   async get(req, res) {
-    
+    const { id } = req.query
+    let profile = await Profile.find({ _id: id })
+    if (!profile) {
+      res.status(404);
+      return res.send('Profile not found')
+    }
+    delete profile.password
+    return res.json(profile)
   }
 }

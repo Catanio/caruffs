@@ -9,6 +9,7 @@ routes.post('/ride', RideController.store);
 
 // User
 routes.post('/profile', ProfileController.store);
-routes.post('/login', ProfileController.login);
+routes.get('/profile', ProfileController.login);
+routes.post('/login', ProfileController.get);
 
 module.exports = routes;
