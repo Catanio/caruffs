@@ -28,5 +28,16 @@ module.exports = {
     }
 
     return res.json({ match: match.lean() })
+  },
+
+  async index(req, res) {
+    let matches
+    if (req.user.vehicle) {
+      matches = await Match.find({ ride: { owner: { _id: req.user._id }}})
+    } else {
+      matches = await Match.find({ 'users.$._id': req.user._id })
+    }
+
+    return res.json(matches.lean())
   }
 }

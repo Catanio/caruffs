@@ -9,7 +9,10 @@ const routes = Router();
 // Ride auth
 routes.post('/ride', isAuthorized, RideController.store)
 routes.get('/near-rides', isAuthorized, RideController.index)
-routes.post('/join-ride', isAuthorized, MatchController.join)
+
+// Match auth
+routes.post('/match', isAuthorized, MatchController.join)
+routes.get('/match', isAuthorized, MatchController.index)
 
 // User auth
 routes.put('/profile', isAuthorized, ProfileController.update)
