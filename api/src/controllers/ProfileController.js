@@ -89,6 +89,17 @@ module.exports = {
     return res.json({ profile });
   },
 
+  async recycleToken(req, res) {
+    const { _id } = req.user
+    const profile = await Profile.findOne ({ _id }).lean()
+
+    const token = jwt.sign(profile, process.env.SECRET, {
+      expiresIn: 10000
+    });
+
+    return res.json({ auth: true, token: token });
+  },
+
   async confirmEmail(req, res) {
     const { token } = req.query
     try {
