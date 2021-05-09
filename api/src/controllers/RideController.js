@@ -23,6 +23,10 @@ module.exports = {
   },
 
   async store(req, res) {
+    if (!req.user.vehicle) {
+      res.status(401);
+      return res.send('Must have vehicle to create ride')
+    }
     const { lat, lng, week_info } = req.body;
 
     const location = {
@@ -31,11 +35,11 @@ module.exports = {
     }
 
     const ride = await Ride.create({
-      ownerId: req.user,
+      owner: req.user,
       location,
       week_info,
       available_seats: req.user.vehicle.available_seats
-    }).lean()
+    })
 
     return res.json({ ride })
   }

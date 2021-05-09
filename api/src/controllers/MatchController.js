@@ -5,11 +5,11 @@ module.exports = {
   async join(req, res) {
     const { ride_id } = req.body
 
-    const match = await Match.findOne({ ride: { _id: ride_id, finalized: false }})
-    if (match.$isEmpty()) {
+    let match = await Match.findOne({ ride: { _id: ride_id, finalized: false }})
+    if (!match) {
       const ride = await Ride.findOne({ _id: ride_id }).lean()
       
-      await Match.create({
+      match = await Match.create({
         ride,
         users: [req.user],
         finalized: false
@@ -17,7 +17,7 @@ module.exports = {
     } else {
       const match_obj = match.lean()
       const fully = match_obj.ride.available_seats === (match_obj.users.length + 1)
-      await match.update({
+      match = await match.update({
         '$push': {
           users: req.user
         },
@@ -27,17 +27,18 @@ module.exports = {
       }).lean()
     }
 
-    return res.json({ match: match.lean() })
+    return res.json({ match: match })
   },
 
   async index(req, res) {
     let matches
     if (req.user.vehicle) {
-      matches = await Match.find({ ride: { owner: { _id: req.user._id }}})
+      matches = await Match.find({"ride.owner._id": req.user._id })
     } else {
-      matches = await Match.find({ 'users.$._id': req.user._id })
+      matches = await Match.find({"users": {"$elemMatch": { "_id": req.user._id }}})
+      console.log(matches)
     }
 
-    return res.json(matches.lean())
+    return res.json(matches)
   }
 }

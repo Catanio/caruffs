@@ -15,22 +15,24 @@ module.exports = {
     }
     try {
       body.password = Base64.stringify(SHA256(body.password))
+      body.confirmed_email = false
 
-      const profile = await Profile.create(body);
+      const profile = await Profile.create(body)
       
-      mailer.sendConfirmationEmail(mail)
+      mailer.sendConfirmationEmail(profile.mail)
       
       return res.json({
         profile,
       })
     } catch (e) {
+      console.log(e)
       return res.json({ result: false, details: e })
     }
   },
 
   async login(req, res) {
     const { password, mail } = req.body
-    const profile = await Profile.findOne ({ mail }).lean()
+    const profile = await Profile.findOne({ mail }).lean()
 
     if (!profile) {
       res.status(404);
