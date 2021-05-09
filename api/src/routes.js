@@ -23,5 +23,7 @@ routes.post('/refresh-token', isAuthorized, ProfileController.recycleToken)
 routes.post('/profile', ProfileController.store)
 routes.post('/login', ProfileController.login)
 routes.get('/confirm', ProfileController.confirmEmail)
+routes.post('/request-change-password', ProfileController.requestChangePassword)
+routes.post('/change-password', ProfileController.changePassword)
 
 module.exports = routes;
