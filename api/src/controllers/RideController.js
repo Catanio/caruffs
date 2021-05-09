@@ -33,8 +33,9 @@ module.exports = {
     const ride = await Ride.create({
         ownerId: req.user._id,
         location,
-        week_info
-    })
+        week_info,
+        available_seats: req.user.vehicle.available_seats
+    }).lean()
 
     return res.json({ ride })
   }
