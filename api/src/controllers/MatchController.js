@@ -36,7 +36,6 @@ module.exports = {
       matches = await Match.find({"ride.owner._id": req.user._id })
     } else {
       matches = await Match.find({"users": {"$elemMatch": { "_id": req.user._id }}})
-      console.log(matches)
     }
 
     return res.json(matches)
