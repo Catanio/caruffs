@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const PointSchema = require('./utils/PointSchema');
+const Profile = require('./Profile')
 
 const RideSchema = new mongoose.Schema({
-  ownerId: mongoose.Types.ObjectId,
+  owner: Profile,
   location: {
     type: PointSchema,
     index: '2dsphere',

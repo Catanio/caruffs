@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const ProfileSchema = require('./Profile')
+const ProfileSchema = require('./Profile');
+const Ride = require('./Ride');
 
 const MatchSchema = new mongoose.Schema({
-  ride_id: mongoose.Types.ObjectId,
-  users: [ProfileSchema]
+  ride: Ride,
+  users: [ProfileSchema],
+  finalized: Boolean
 },
 {
   timestamps: true
