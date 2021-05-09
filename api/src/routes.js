@@ -8,9 +8,12 @@ const routes = Router();
 routes.get('/ride', RideController.index)
 routes.post('/ride', RideController.store)
 
-// User
+// User auth
 routes.put('/profile', isAuthorized, ProfileController.update)
 routes.get('/profile', isAuthorized, ProfileController.get)
+routes.post('/refresh-token', isAuthorized, ProfileController.recycleToken)
+
+// User public
 routes.post('/profile', ProfileController.store)
 routes.post('/login', ProfileController.login)
 routes.get('/confirm', ProfileController.confirmEmail)
