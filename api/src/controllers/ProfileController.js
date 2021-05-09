@@ -1,7 +1,5 @@
 const Profile = require('../models/Profile');
 const SHA256 = require("crypto-js/sha256");
-const { get } = require('../models/utils/PointSchema');
-const { update } = require('../models/Profile');
 
 module.exports = {
   async store(req, res) {
