@@ -34,6 +34,19 @@ const sendConfirmationEmail = async (mail) => {
   });
 }
 
+const sendChangePasswordEmail = async (mail, _id) => {
+  const token = jwt.sign({ mail, _id }, process.env.SECRET)
+  const link = process.env.FRONT_ADDRESS + '/change_password?token=' + token
+  const template = fs.readFileSync(path.join(process.cwd(), '/src/templates/recovery_password.html')).toString().replace('{{RECOVERY_PASSWORD_ADDRESS}}', link).replace('{{API_ADDRESS}}', process.env.API_ADDRESS)
+  await sendEmail({
+    receivers: mail,
+    subject: 'Confirmar alteração de senha no CarUFFS',
+    textBody: `Caso não tenha sido solicitado alteração de senha no sistema CarUFFS, ignorar este email, caso contrario clique no link: ${link}`,
+    htmlTemplate: template
+  });
+}
+
 module.exports = {
-  sendConfirmationEmail
+  sendConfirmationEmail,
+  sendChangePasswordEmail
 }

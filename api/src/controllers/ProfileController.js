@@ -109,5 +109,32 @@ module.exports = {
     } catch (e) {
       return res.status(401).send('Desculpe, não conseguimos identificar sua conta');
     }
+  },
+
+  async requestChangePassword(req, res) {
+    const { mail } = req.body
+    const profile = await Profile.findOne({ mail }).lean()
+
+    await mailer.sendChangePasswordEmail(profile.mail, profile._id)
+
+    res.json({ success: true })
+  },
+
+  async changePassword(req, res) {
+    const { token, new_password } = req.body
+    const { mail, _id } = jwt.verify(token, process.env.SECRET)
+    const profile = await Profile.findOne({ _id }).lean()
+
+    if (profile.mail !== mail) {
+      res.status(401)
+      return res.send('Invalid token')
+    } else {
+      await Profile.updateOne({ _id }, {
+        '$set': {
+          password: Base64.stringify(SHA256(new_password))
+        }
+      })
+    }
+    res.json({ success: true })
   }
 }
