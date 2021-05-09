@@ -27,7 +27,7 @@ const sendConfirmationEmail = async (email) => {
   await sendEmail({
     receivers: email,
     subject: 'Obrigado por ter se cadastrado no CarUFFS',
-    textBody: `Obrigado pelo seu cadastro no CarUFFS, clique no link: ${link}`,
+    textBody: `Obrigado pelo seu cadastro no CarUFFS, clique no link: ${link}, para confirmar seu email e finalziar seu cadastro`,
     htmlTemplate: template
   });
 }
