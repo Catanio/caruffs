@@ -7,10 +7,7 @@ const routes = Router();
 
 // Ride auth
 routes.post('/ride', isAuthorized, RideController.store)
-
-// Ride public
-routes.get('/ride', RideController.index)
-
+routes.get('/near-rides', isAuthorized, RideController.index)
 
 // User auth
 routes.put('/profile', isAuthorized, ProfileController.update)

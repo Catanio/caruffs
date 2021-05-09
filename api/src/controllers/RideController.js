@@ -2,8 +2,24 @@ const Ride = require('../models/Ride')
 
 module.exports = {
   async index(req, res) {
-    const rides = await Ride.find();
-    return res.json(rides);
+    const { latitude, longitude, radius } = req.query
+
+    const rides = await Ride.find({
+        offering :  {
+            $eq: true
+        },
+        location: {
+            $near: {
+                $geometry: {
+                    type: 'Point',
+                    coordinates: [longitude, latitude],
+                },
+                $maxDistance: radius,
+            },
+        },
+    }).lean()
+
+    return res.json(rides)
   },
 
   async store(req, res) {
