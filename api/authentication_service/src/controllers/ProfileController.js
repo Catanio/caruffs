@@ -1,4 +1,4 @@
-const { Profile } = require('../models/Profile');
+const Profile = require('../models/Profile');
 const SHA256 = require("crypto-js/sha256");
 const Base64 = require('crypto-js/enc-base64')
 const jwt = require('jsonwebtoken')
@@ -59,9 +59,9 @@ module.exports = {
   },
 
   async get(req, res) {
-    const { _id } = req.user
-    console.log(req.user)
-    let profile = await Profile.find({ _id }).lean()
+    const { id } = req.query
+
+    let profile = await Profile.find({ _id: id }).lean()
     if (!profile) {
       res.status(404);
       return res.send('Profile not found')
@@ -71,13 +71,13 @@ module.exports = {
   },
 
   async update(req, res) {
-    const { _id } = req.user
+    const { id } = req.query
     const body = req.body
 
     delete body.password
     delete body.idUffs
 
-    const profile = await Profile.updateOne({ _id }, {
+    const profile = await Profile.updateOne({ _id: id }, {
       '$set': body
     }).lean()
 
@@ -85,8 +85,8 @@ module.exports = {
   },
 
   async recycleToken(req, res) {
-    const { _id } = req.user
-    const profile = await Profile.findOne ({ _id }).lean()
+    const { id } = req.query
+    const profile = await Profile.findOne ({ _id: id }).lean()
 
     const token = jwt.sign(profile, process.env.SECRET, {
       expiresIn: 10000

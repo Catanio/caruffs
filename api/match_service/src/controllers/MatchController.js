@@ -1,17 +1,15 @@
-const { Ride } = require('../models/Ride')
-const { Match } = require('../models/Match')
+const Match = require('../models/Match')
 
 module.exports = {
   async join(req, res) {
-    const { ride_id } = req.body
+    const { ride } = req.body
 
-    let match = await Match.findOne({ ride: { _id: ride_id, finalized: false }})
+    let match = await Match.findOne({"ride._id": ride._id, finalized: false })
     if (!match) {
-      const ride = await Ride.findOne({ _id: ride_id }).lean()
       
       match = await Match.create({
         ride,
-        users: [req.user],
+        users: [req.body.user],
         finalized: false
       })
     } else {
@@ -19,7 +17,7 @@ module.exports = {
       const fully = match_obj.ride.available_seats === (match_obj.users.length + 1)
       match = await match.update({
         '$push': {
-          users: req.user
+          users: req.body.user
         },
         '$set': {
           finalized: fully
@@ -31,12 +29,8 @@ module.exports = {
   },
 
   async index(req, res) {
-    let matches
-    if (req.user.vehicle) {
-      matches = await Match.find({"ride.owner._id": req.user._id })
-    } else {
-      matches = await Match.find({"users": {"$elemMatch": { "_id": req.user._id }}})
-    }
+    const { id } = req.query
+    const matches = await Match.find({$or: [{ "ride.owner._id": id }, {"users": {"$elemMatch": { "_id": id }}}]})
 
     return res.json(matches)
   }

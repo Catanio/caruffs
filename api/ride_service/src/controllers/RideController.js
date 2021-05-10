@@ -1,4 +1,4 @@
-const { Ride } = require('../models/Ride')
+const Ride = require('../models/Ride')
 
 module.exports = {
   async index(req, res) {
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   async store(req, res) {
-    if (!req.user.vehicle) {
+    if (!req.body.user.vehicle) {
       res.status(401);
       return res.send('Must have vehicle to create ride')
     }
@@ -35,10 +35,10 @@ module.exports = {
     }
 
     const ride = await Ride.create({
-      owner: req.user,
+      owner: req.body.user,
       location,
       week_info,
-      available_seats: req.user.vehicle.available_seats
+      available_seats: req.body.user.vehicle.available_seats
     })
 
     return res.json({ ride })
