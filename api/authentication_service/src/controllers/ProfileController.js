@@ -2,7 +2,7 @@ const Profile = require('../models/Profile');
 const SHA256 = require("crypto-js/sha256");
 const Base64 = require('crypto-js/enc-base64')
 const jwt = require('jsonwebtoken')
-const mailer = require('../libs/mailer')
+const amqp = require('../libs/amqp')
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
 
       const profile = await Profile.create(body)
       
-      mailer.sendConfirmationEmail(profile.mail)
+      amqp.send(JSON.stringify({ mail: profile.mail, template: 'new_account' }))
       
       return res.json({
         profile,
@@ -115,7 +115,7 @@ module.exports = {
     const { mail } = req.body
     const profile = await Profile.findOne({ mail }).lean()
 
-    await mailer.sendChangePasswordEmail(profile.mail, profile._id)
+    amqp.send(JSON.stringify({ mail: profile.mail, id: profile._id, template: 'forgot_password' }))
 
     res.json({ success: true })
   },
