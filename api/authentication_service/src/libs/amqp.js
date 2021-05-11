@@ -8,7 +8,7 @@ const send = (msg) => {
       ch.sendToQueue(q, Buffer.from(msg, 'utf8'));
       console.log(" [x] Sent %s", msg);
     });
-    setTimeout(() => { conn.close(); process.exit(0) }, 500);
+    setTimeout(() => { conn.close() }, 500);
   });
 }
 

@@ -1,0 +1,100 @@
+version: '3'
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:3.6.6-management'
+    ports:
+      - "4369:4369"
+      - "5672:5672"
+      - "15672:15672"
+      - "25672:25672"
+      - "35197:35197"
+    volumes:
+      - ./data:/var/lib/rabbitmq
+      - ./data/logs:/var/log/rabbitmq
+    hostname: rabbit
+
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: ./gateway/Dockerfile
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: 12
+      PORT: 3000
+      SECRET: caruffssecret
+      AUTHENTICATION_URL: http://authentication_service:3001
+      RIDE_URL: http://ride_service:3002
+      MATCH_URL: http://match_service:3003
+
+  authentication_service:
+    container_name: authentication_service
+    build:
+      context: .
+      dockerfile: ./authentication_service/Dockerfile
+    expose:
+      - 3001
+    ports:
+      - 3001:3001
+    depends_on:
+      - rabbitmq
+      - gateway
+    environment:
+      NODE_ENV: 12
+      PORT: 3001
+      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+      SECRET: caruffssecret
+      QUEUE_NAME: mailing_queue
+      RABBITMQ_ADDRESS: amqp://rabbitmq:5672
+
+  ride_service:
+    container_name: ride_service
+    build:
+      context: .
+      dockerfile: ./ride_service/Dockerfile
+    expose:
+      - 3002
+    ports:
+      - 3002:3002
+    depends_on:
+      - gateway
+    environment:
+      NODE_ENV: 12
+      PORT: 3002
+      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+
+  match_service:
+    container_name: match_service
+    build:
+      context: .
+      dockerfile: ./match_service/Dockerfile
+    expose:
+      - 3003
+    ports:
+      - 3003:3003
+    depends_on:
+      - gateway
+    environment:
+      NODE_ENV: 12
+      PORT: 3003
+      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+
+  
+  mailing_service:
+    container_name: mailing_service
+    build:
+      context: .
+      dockerfile: ./mailing_service/Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      QUEUE_NAME: mailing_queue
+      RABBITMQ_ADDRESS: amqp://rabbitmq:5672
+      EMAIL_ACCOUNT: car.uffs.sys@gmail.com
+      EMAIL_PASSWORD: uffscarcar123
+      SECRET: caruffssecret
+      API_ADDRESS: http://gateway:3000
