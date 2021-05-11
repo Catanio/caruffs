@@ -1,22 +1,12 @@
 const Profile = require('../models/Profile');
-const SHA256 = require("crypto-js/sha256");
-const Base64 = require('crypto-js/enc-base64')
-const jwt = require('jsonwebtoken')
-const amqp = require('../libs/amqp')
-const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+const jwt = require('jsonwebtoken');
+const amqp = require('../libs/amqp');
 
 module.exports = {
   async store(req, res) {
     const body = req.body
 
-    if (!emailRegexp.test(body.mail)) {
-      res.status(401);
-      return res.send('Invalid email')
-    }
     try {
-      body.password = Base64.stringify(SHA256(body.password))
-      body.confirmed_email = false
-
       const profile = await Profile.create(body)
       
       amqp.send(JSON.stringify({ mail: profile.mail, template: 'new_account' }))
@@ -25,8 +15,8 @@ module.exports = {
         profile,
       })
     } catch (e) {
-      console.log(e)
-      return res.json({ result: false, details: e })
+      res.status(401)
+      return res.json({ result: false, details: e.message })
     }
   },
 
@@ -131,7 +121,7 @@ module.exports = {
     } else {
       await Profile.updateOne({ _id }, {
         '$set': {
-          password: Base64.stringify(SHA256(new_password))
+          password: new_password
         }
       })
     }

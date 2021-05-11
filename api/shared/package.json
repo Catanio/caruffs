@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "chai": "^4.3.4",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
-    "jsonwebtoken": "^8.5.1"
+    "sinon": "^10.0.0"
   }
 }
