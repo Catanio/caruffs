@@ -1,5 +1,13 @@
 version: '3'
 services:
+  mongo-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongo-db
+    volumes:
+      - ./db/:/data/db
+
   rabbitmq:
     container_name: rabbitmq
     image: 'rabbitmq:3.6.6-management'
@@ -43,10 +51,13 @@ services:
     depends_on:
       - rabbitmq
       - gateway
+      - mongo-db
+    links:
+      - mongo-db
     environment:
       NODE_ENV: 12
       PORT: 3001
-      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+      CONNECTION_STRING: mongodb://mongo-db:27017
       SECRET: caruffssecret
       QUEUE_NAME: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
@@ -62,10 +73,13 @@ services:
       - 3002:3002
     depends_on:
       - gateway
+      - mongo-db
+    links:
+      - mongo-db
     environment:
       NODE_ENV: 12
       PORT: 3002
-      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+      CONNECTION_STRING: mongodb://mongo-db:27017
 
   match_service:
     container_name: match_service
@@ -78,10 +92,13 @@ services:
       - 3003:3003
     depends_on:
       - gateway
+      - mongo-db
+    links:
+      - mongo-db
     environment:
       NODE_ENV: 12
       PORT: 3003
-      CONNECTION_STRING: mongodb+srv://adm:9XIh4bdywjikBOKu@development.khj7l.mongodb.net/users?retryWrites=true&w=majority
+      CONNECTION_STRING: mongodb://mongo-db:27017
 
   
   mailing_service:
@@ -95,6 +112,6 @@ services:
       QUEUE_NAME: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
       EMAIL_ACCOUNT: car.uffs.sys@gmail.com
-      EMAIL_PASSWORD: uffscarcar123
+      EMAIL_PASSWORD: <senha aqui>
       SECRET: caruffssecret
       API_ADDRESS: http://gateway:3000
