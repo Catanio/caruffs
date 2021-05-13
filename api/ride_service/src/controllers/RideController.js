@@ -51,5 +51,17 @@ module.exports = {
         }
       })
     }
+  },
+
+  async destroyRide(req, res) {
+    const { id } = req.query
+
+    try  {
+      await Ride.deleteOne({ _id: id })
+      
+      return res.json({ success: true })
+    } catch (e) {
+      return res.status(404).json({ success: false })
+    }
   }
 }

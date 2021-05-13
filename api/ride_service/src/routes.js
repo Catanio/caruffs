@@ -6,6 +6,7 @@ const routes = Router();
 
 routes.post('/ride', RideController.store)
 routes.get('/near-rides', RideController.index)
+routes.delete('/ride', RideController.destroyRide)
 utils.amqp.consume(process.env.PROPAGATE_USER_QUEUE, RideController.updateUser)
 
 module.exports = routes;

@@ -9,6 +9,7 @@ const routes = Router();
 // Ride auth
 routes.post('/ride', utils.authenticate.isAuthorized, RideController.store)
 routes.get('/near-rides', utils.authenticate.isAuthorized, RideController.index)
+routes.delete('/ride', utils.authenticate.isAuthorized, RideController.destroyRide)
 
 // Match auth
 routes.post('/match', utils.authenticate.isAuthorized, MatchController.join)
