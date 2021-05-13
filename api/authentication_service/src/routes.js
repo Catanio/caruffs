@@ -6,6 +6,7 @@ const routes = Router();
 // User auth
 routes.put('/profile', ProfileController.update)
 routes.get('/profile', ProfileController.get)
+routes.delete('/profile', ProfileController.destroyProfile)
 routes.get('/refresh-token', ProfileController.recycleToken)
 
 // User public

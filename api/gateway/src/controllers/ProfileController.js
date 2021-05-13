@@ -79,5 +79,15 @@ module.exports = {
       res.status(e.response.status);
       return res.json(e.response.data)
     }
+  },
+  
+  async destroyProfile(req, res) {
+    try {
+      const response = await axios.delete(`${process.env.AUTHENTICATION_URL}/profile?id=${req.user._id}`)
+      return res.json(response.data)
+    } catch (e) {
+      res.status(e.response.status);
+      return res.json(e.response.data)
+    }
   }
 }

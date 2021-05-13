@@ -1,13 +1,11 @@
 const Ride = require('../models/Ride')
+const { utils } = require('caruffs_shared')
 
 module.exports = {
   async index(req, res) {
     const { latitude, longitude, radius } = req.query
 
     const rides = await Ride.find({
-      offering :  {
-        $eq: true
-      },
       location: {
         $near: {
           $geometry: {
@@ -42,5 +40,16 @@ module.exports = {
     })
 
     return res.json({ ride })
+  },
+
+  async updateUser(msg) {
+    console.log(msg)
+    if (msg.action === 'delete') {
+      await Ride.updateMany({ 'owner._id': msg._id }, {
+        '$set': {
+          owner: utils.redactedProfile()
+        }
+      })
+    }
   }
 }

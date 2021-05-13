@@ -17,6 +17,7 @@ routes.get('/match', utils.authenticate.isAuthorized, MatchController.index)
 // User auth
 routes.put('/profile', utils.authenticate.isAuthorized, ProfileController.update)
 routes.get('/profile', utils.authenticate.isAuthorized, ProfileController.get)
+routes.delete('/profile', utils.authenticate.isAuthorized, ProfileController.destroyProfile)
 routes.get('/refresh-token', utils.authenticate.isAuthorized, ProfileController.recycleToken)
 
 // User public

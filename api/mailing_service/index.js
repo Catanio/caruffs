@@ -1,5 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const amqp = require('amqplib/callback_api');
 const messageProcessor = require('./src/messageProcessor')
 

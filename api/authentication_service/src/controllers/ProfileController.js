@@ -1,6 +1,6 @@
 const Profile = require('../models/Profile');
 const jwt = require('jsonwebtoken');
-const amqp = require('../libs/amqp');
+const { utils } = require('caruffs_shared');
 
 module.exports = {
   async store(req, res) {
@@ -9,7 +9,7 @@ module.exports = {
     try {
       const profile = await Profile.create(body)
       
-      amqp.send(JSON.stringify({ mail: profile.mail, template: 'new_account' }))
+      utils.amqp.send(JSON.stringify({ mail: profile.mail, template: 'new_account' }), process.env.MAILING_QUEUE)
       
       return res.json({
         profile,
@@ -22,7 +22,7 @@ module.exports = {
 
   async login(req, res) {
     const { password, mail } = req.body
-    const profile = await Profile.findOne({ mail }).lean()
+    const profile = await Profile.findOne({ mail })
 
     if (!profile) {
       res.status(404);
@@ -34,11 +34,11 @@ module.exports = {
       return res.send('Unverified email')
     }
 
-    if (profile.password === Base64.stringify(SHA256(password))) {
+    if (profile.comparePassword(password)) {
       delete profile.password
       delete profile.__v
 
-      const token = jwt.sign(profile, process.env.SECRET, {
+      const token = jwt.sign(profile.toObject(), process.env.SECRET, {
         expiresIn: 10000
       });
       return res.json({ auth: true, token: token });
@@ -105,7 +105,7 @@ module.exports = {
     const { mail } = req.body
     const profile = await Profile.findOne({ mail }).lean()
 
-    amqp.send(JSON.stringify({ mail: profile.mail, id: profile._id, template: 'forgot_password' }))
+    utils.amqp.send(JSON.stringify({ mail: profile.mail, id: profile._id, template: 'forgot_password' }), process.env.MAILING_QUEUE)
 
     res.json({ success: true })
   },
@@ -126,5 +126,20 @@ module.exports = {
       })
     }
     res.json({ success: true })
+  },
+  
+  async destroyProfile(req, res) {
+    const { id } = req.query
+    const profile = await Profile.findOne({ _id: id }).lean()
+
+    try  {
+      await Profile.deleteOne({ _id: profile._id })
+      
+      utils.amqp.send(JSON.stringify({ _id: profile._id, action: 'delete', is_owner: !!profile.vehicle }), process.env.PROPAGATE_USER_QUEUE)
+
+      return res.json({ success: true })
+    } catch (e) {
+      return res.status(404).json({ success: false })
+    }
   }
 }

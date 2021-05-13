@@ -59,14 +59,16 @@ services:
       PORT: 3001
       CONNECTION_STRING: mongodb://mongo-db:27017
       SECRET: caruffssecret
-      QUEUE_NAME: mailing_queue
+      MAILING_QUEUE: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
+      PROPAGATE_USER_QUEUE: propagate_user_queue
 
   ride_service:
     container_name: ride_service
     build:
       context: .
       dockerfile: ./ride_service/Dockerfile
+    restart: always
     expose:
       - 3002
     ports:
@@ -75,11 +77,14 @@ services:
       - gateway
       - mongo-db
     links:
+      - rabbitmq
       - mongo-db
     environment:
       NODE_ENV: 12
       PORT: 3002
       CONNECTION_STRING: mongodb://mongo-db:27017
+      PROPAGATE_USER_QUEUE: propagate_user_queue
+      RABBITMQ_ADDRESS: amqp://rabbitmq:5672
 
   match_service:
     container_name: match_service
@@ -94,12 +99,14 @@ services:
       - gateway
       - mongo-db
     links:
+      - rabbitmq
       - mongo-db
     environment:
       NODE_ENV: 12
       PORT: 3003
       CONNECTION_STRING: mongodb://mongo-db:27017
-
+      RABBITMQ_ADDRESS: amqp://rabbitmq:5672
+      PROPAGATE_USER_QUEUE: propagate_user_queue
   
   mailing_service:
     container_name: mailing_service
@@ -109,7 +116,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      QUEUE_NAME: mailing_queue
+      MAILING_QUEUE: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
       EMAIL_ACCOUNT: car.uffs.sys@gmail.com
       EMAIL_PASSWORD: <senha aqui>

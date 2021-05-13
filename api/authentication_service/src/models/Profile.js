@@ -30,4 +30,8 @@ const ProfileSchema = new mongoose.Schema({
   vehicle: schemas.VehicleSchema
 });
 
+ProfileSchema.methods.comparePassword = function(password) {
+  return this.password === Base64.stringify(SHA256(password))
+}
+
 module.exports = mongoose.model('Profile', ProfileSchema);
