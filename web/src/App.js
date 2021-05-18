@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 
+import Login from "./containers/Login/Login"
 import Maps from "./containers/Maps/Maps";
 import Footer from "./containers/Footer/Footer";
 import CreateRideModal from "./containers/CreateRide/CreateRideModal";
@@ -59,6 +60,11 @@ const MockMarkers = [
 function App() {
   const [nav, setNav] = useState(false);
   const [createRideModal, setCreateRideModal] = useState(false);
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
 
   return (
     <main>
