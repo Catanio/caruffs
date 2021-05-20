@@ -57,7 +57,7 @@ services:
     environment:
       NODE_ENV: 12
       PORT: 3001
-      CONNECTION_STRING: mongodb://mongo-db:27017
+      CONNECTION_STRING: ${CONNECTION_STRING}
       SECRET: caruffssecret
       MAILING_QUEUE: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
@@ -82,7 +82,7 @@ services:
     environment:
       NODE_ENV: 12
       PORT: 3002
-      CONNECTION_STRING: mongodb://mongo-db:27017
+      CONNECTION_STRING: ${CONNECTION_STRING}
       PROPAGATE_USER_QUEUE: propagate_user_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
 
@@ -104,7 +104,7 @@ services:
     environment:
       NODE_ENV: 12
       PORT: 3003
-      CONNECTION_STRING: mongodb://mongo-db:27017
+      CONNECTION_STRING: ${CONNECTION_STRING}
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
       PROPAGATE_USER_QUEUE: propagate_user_queue
   
@@ -119,6 +119,6 @@ services:
       MAILING_QUEUE: mailing_queue
       RABBITMQ_ADDRESS: amqp://rabbitmq:5672
       EMAIL_ACCOUNT: car.uffs.sys@gmail.com
-      EMAIL_PASSWORD: <senha aqui>
+      EMAIL_PASSWORD: ${MAIL_PASSWORD}
       SECRET: caruffssecret
       API_ADDRESS: http://gateway:3000
