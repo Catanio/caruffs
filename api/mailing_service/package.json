@@ -7,7 +7,6 @@
     "amqplib": "^0.7.1"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.6.0",
     "nodemon": "^2.0.3"
