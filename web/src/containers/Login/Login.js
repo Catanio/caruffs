@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import './Login.css';
+import './styles.css';
 
 async function loginUser(credentials) {
     // return fetch(`${process.env.AUTHENTICATION_URL}/login`, {
