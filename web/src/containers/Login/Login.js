@@ -5,7 +5,7 @@ import './styles.css';
 
 async function loginUser(credentials) {
     // return fetch(`${process.env.AUTHENTICATION_URL}/login`, {
-        return fetch('http://localhost:8080/login', {
+        return fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -17,13 +17,13 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-    const [username, setUserName] = useState();
+    const [mail, setUserName] = useState();
     const [password, setPassword] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();
         const token = await loginUser({
-            username,
+            mail,
             password
         });
         setToken(token);
