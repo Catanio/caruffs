@@ -21,8 +21,8 @@ module.exports = {
   },
 
   async login(req, res) {
-    const { password, mail } = req.body
-    const profile = await Profile.findOne({ mail })
+    const { password, mail, idUffs } = req.body
+    const profile = await Profile.findOne({ $or: [{ mail }, { idUffs }] })
 
     if (!profile) {
       res.status(404);
