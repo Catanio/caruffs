@@ -15,19 +15,19 @@ import RoomIcon from "@material-ui/icons/Room";
 import calendar from "./calendar.png";
 import "./styles.css";
 
-const position = [51.505, -0.09];
+const position = [-27.1187, -52.6022];
 
 const CreateRideModal = ({ open, handleClose }) => {
-  let mapCenter = position;
+  const [mapCenter, setMapCenter] = useState(position);
   const [step, setStep] = useState(0);
   const [days, setDays] = useState({
-    mon: true,
-    tue: true,
-    wed: true,
-    thu: true,
-    fri: true,
-    sat: true,
-    sun: true,
+    mon: false,
+    tue: false,
+    wed: false,
+    thu: false,
+    fri: false,
+    sat: false,
+    sun: false,
   });
   const [startHours, setStartHours] = useState({
     mon: "",
@@ -86,7 +86,7 @@ const CreateRideModal = ({ open, handleClose }) => {
 
   const saveRide = () => {
     let rideObj = {
-      location: mapCenter,
+      location: [mapCenter.lat, mapCenter.lng],
       weekInfo: Object.keys(days)
         .filter((day) => days[day])
         .map((day) => ({
@@ -94,8 +94,8 @@ const CreateRideModal = ({ open, handleClose }) => {
           backing: endHours[day],
         })),
     };
-
-    mapCenter = position;
+    console.log(mapCenter);
+    // mapCenter = position;
 
     console.log(rideObj);
 
@@ -113,7 +113,9 @@ const CreateRideModal = ({ open, handleClose }) => {
   function MapEvents() {
     const map = useMapEvents({
       moveend: () => {
-        mapCenter = map.getCenter();
+        setMapCenter(map.getCenter());
+
+        console.log(mapCenter);
       },
     });
     return null;

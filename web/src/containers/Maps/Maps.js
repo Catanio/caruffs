@@ -14,7 +14,7 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const position = [51.505, -0.09];
+const startPosition = [-27.1187, -52.6022];
 
 const Maps = ({ markers }) => {
   const [viewRideModal, setViewRideModal] = useState({
@@ -25,7 +25,7 @@ const Maps = ({ markers }) => {
   return (
     <>
       <MapContainer
-        center={position}
+        center={startPosition}
         zoom={14}
         scrollWheelZoom={false}
         className="maps-container"
