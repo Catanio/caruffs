@@ -21,8 +21,8 @@ module.exports = {
   },
 
   async login(req, res) {
-    const { password, mail, idUffs } = req.body
-    const profile = await Profile.findOne({ $or: [{ mail }, { idUffs }] })
+    const { password, user } = req.body
+    const profile = await Profile.findOne({ $or: [{ mail: user }, { idUffs: user }] })
 
     if (!profile) {
       res.status(404);
@@ -35,10 +35,11 @@ module.exports = {
     }
 
     if (profile.comparePassword(password)) {
-      delete profile.password
-      delete profile.__v
+      let obj = profile.toObject()
+      delete obj.password
+      delete obj.__v
 
-      const token = jwt.sign(profile.toObject(), process.env.SECRET, {
+      const token = jwt.sign(obj, process.env.SECRET, {
         expiresIn: 10000
       });
       return res.json({ auth: true, token: token });
