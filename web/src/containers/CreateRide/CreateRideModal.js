@@ -94,7 +94,6 @@ const CreateRideModal = ({ open, handleClose }) => {
           backing: endHours[day],
         })),
     };
-    console.log(mapCenter);
     // mapCenter = position;
 
     console.log(rideObj);
@@ -114,8 +113,6 @@ const CreateRideModal = ({ open, handleClose }) => {
     const map = useMapEvents({
       moveend: () => {
         setMapCenter(map.getCenter());
-
-        console.log(mapCenter);
       },
     });
     return null;
