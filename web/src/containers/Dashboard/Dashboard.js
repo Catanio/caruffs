@@ -1,18 +1,15 @@
 import { useState } from "react";
-import Routes from "./Routes"
-
 import PersonIcon from "@material-ui/icons/Person";
+import { logout } from "../../services/auth";
+import { Link } from "react-router-dom";
 
-import useToken from './hooks/useToken';
-import Dashboard from "./containers/Dashboard/Dashboard";
-import Login from "./containers/Login/Login"
-import Maps from "./containers/Maps/Maps";
-import Footer from "./containers/Footer/Footer";
-import CreateRideModal from "./containers/CreateRide/CreateRideModal";
+import Maps from "../Maps/Maps";
+import Footer from "../Footer/Footer";
+import CreateRideModal from "../CreateRide/CreateRideModal";
 
-import "./App.css";
+import "./styles.css";
 
-import UnnamedImg from "./unnamed.png";
+import UnnamedImg from "../../unnamed.png";
 
 const MockMarkers = [
   {
@@ -61,15 +58,53 @@ const MockMarkers = [
   },
 ];
 
-function App() {
-  const { token, setToken } = useToken();
-
-  if(!token) {
-    return <Login setToken={setToken} />
+function Dashboard() {
+    const [nav, setNav] = useState(false);
+    const [createRideModal, setCreateRideModal] = useState(false);
+  
+    return (
+      <main>
+        <button className="header-button" 
+          onClick={() => setCreateRideModal(true)}
+        >
+          Oferecer Carona!
+        </button>
+  
+        <button className="open-nav" onClick={() => setNav(true)}>
+          <PersonIcon />
+        </button>
+  
+        <nav className={nav ? "opened" : ""}>
+          <button className="close-nav" onClick={() => setNav(false)}>
+            &times;
+          </button>
+  
+          <div className="nav-user">
+            <div
+              className="nav-user-image"
+              style={{ backgroundImage: `url(${UnnamedImg})` }}
+            />
+  
+            <p>Usuário</p>
+          </div>
+  
+          <ul className="nav-options">
+            <li>Meu perfil</li>
+            <li>Minhas Caronas</li>
+            <li><a href="/" onClick={() => logout} class="nav-button" >Sair</a></li>
+          </ul>
+        </nav>
+  
+        <Maps markers={MockMarkers} />
+  
+        <CreateRideModal
+          open={createRideModal}
+          handleClose={() => setCreateRideModal(false)}
+        />
+  
+        <Footer />
+      </main>
+    );
   }
-
-  return <Dashboard />
-
-}
-
-export default App;
+  
+  export default Dashboard;
