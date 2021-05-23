@@ -91,7 +91,7 @@ function Dashboard() {
           <ul className="nav-options">
             <li>Meu perfil</li>
             <li>Minhas Caronas</li>
-            <li><a href="/" onClick={() => logout} class="nav-button" >Sair</a></li>
+            <li><Link to="/" onClick={() => logout} class="nav-button" >Sair</Link></li>
           </ul>
         </nav>
   
