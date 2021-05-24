@@ -6,10 +6,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "caruffs_shared": "file:../shared",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
     "nodemon": "^2.0.3"
   },
   "scripts": {

@@ -21,10 +21,6 @@ module.exports = {
   },
 
   async store(req, res) {
-    if (!req.body.user.vehicle) {
-      res.status(401);
-      return res.send('Must have vehicle to create ride')
-    }
     const { lat, lng, week_info } = req.body;
 
     const location = {
