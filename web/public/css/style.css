@@ -1,0 +1,72 @@
+body {
+    background-color: white;
+    text-align: center;
+    width: 100%;
+}
+
+h2 {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: rgba(0, 0, 0, 0.74);
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    padding: 50px 20px;
+}
+
+input[type="text"],
+input[type="e-mail"],
+input[type="whatsapp"],
+input[type="genero"],
+input[type="categoria"],
+input[type="mini_bio"],
+input[type="senha"],
+input[type="confirma_senha"],
+textarea,
+select {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    text-align: left;
+    margin: 0;
+    background-color: white;
+    border: 2px solid rgb(114, 135, 136);
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: 250px;
+    display: inline-flex;
+}
+
+.letras {
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 1.0em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.74);
+    width: 250px;
+    margin: 0px;
+    background-color: white;
+    padding: 0px 0px;
+    padding-top: 20px;
+    display: inline-block;
+    text-align: left;
+    justify-content: left;
+}
+
+.login-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px 5px;
+    margin-top: 40px;
+    color: white;
+    text-decoration: none;
+    background-color: rgb(15, 199, 153);
+    border-radius: 5px;
+    padding: 12px 18px;
+    cursor: pointer;
+    width: 250px;
+    display: inline-flex;
+    justify-content: center;
+}
