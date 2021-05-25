@@ -9,7 +9,6 @@ const redactedProfile = () => {
     phone: "redacted",
     mail: "redacted",
     vehicle:{
-      seats: 0,
       color: "redacted",
       brand: "redacted",
       model: "redacted"

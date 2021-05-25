@@ -32,7 +32,6 @@ module.exports = {
       owner: req.body.user,
       location,
       week_info,
-      available_seats: req.body.user.vehicle.available_seats
     })
 
     return res.json({ ride })

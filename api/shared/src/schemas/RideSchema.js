@@ -10,7 +10,6 @@ const RideSchema = new mongoose.Schema({
     index: '2dsphere',
   },
   week_info: [WeekInfoSchema],
-  available_seats: Number,
   offering: Boolean
 });
 

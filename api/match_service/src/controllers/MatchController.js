@@ -15,14 +15,10 @@ module.exports = {
       })
     } else {
       const match_obj = match.lean()
-      const fully = match_obj.ride.available_seats === (match_obj.users.length + 1)
       match = await match.update({
         '$push': {
           users: req.body.user
         },
-        '$set': {
-          finalized: fully
-        }
       }).lean()
     }
 
