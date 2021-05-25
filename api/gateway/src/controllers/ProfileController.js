@@ -5,10 +5,12 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = {
   async store(req, res) {
     try {
-      const buffer = Buffer.from(req.body.photo, 'base64')
-      const id = uuidv4()
-      fs.writeFileSync(`./photos/${id}.png`, buffer)
-      req.body.photo = `/photos/${id}.png`
+      if (req.body.photo) {
+        const buffer = Buffer.from(req.body.photo, 'base64')
+        const id = uuidv4()
+        fs.writeFileSync(`./photos/${id}.png`, buffer)
+        req.body.photo = `/photos/${id}.png`
+      }
       const response = await axios.post(`${process.env.AUTHENTICATION_URL}/create`, req.body)
       return res.json(response.data)
     } catch (e) {
