@@ -15,7 +15,8 @@ const ProfileSchema = new mongoose.Schema({
     validate: (v) => emailRegexp.test(v),
     required: true
   },
-  vehicle: VehicleSchema
+  vehicle: VehicleSchema,
+  photo: String
 });
 
 module.exports = ProfileSchema;

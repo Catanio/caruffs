@@ -27,7 +27,8 @@ const ProfileSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  vehicle: schemas.VehicleSchema
+  vehicle: schemas.VehicleSchema,
+  photo: String
 });
 
 ProfileSchema.methods.comparePassword = function(password) {
