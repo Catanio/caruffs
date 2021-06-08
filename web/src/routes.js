@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import Login from "./containers/Login/Login"
+import SignUp from "./containers/SignUp/SignUp"
 import Dashboard from "./containers/Dashboard/Dashboard"
 import { isAuthenticated } from "./services/auth";
 
@@ -19,7 +20,7 @@ function Routes() {
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/signup" component={() => <h1>SignUp</h1>} />
+            <Route path="/signup" component={SignUp} />
             <PrivateRoute path="/app" component={Dashboard} />
             <Route path="*" component={() => <h1>Page not found</h1>} />
         </Switch>
